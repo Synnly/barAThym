@@ -4,6 +4,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: linear-gradient(135deg, hsla(195, 100%, 85%, 1) 0%, hsla(126, 100%, 90%, 1) 100%);
+    margin-top: 0px;
 }
 
 header {
@@ -11,7 +13,10 @@ header {
     display: flex;
     flex-direction: row;
     align-items: start;
-    border: solid green 1px;
+    border: 3px solid white;
+    border-top: none;
+    border-radius: 0px 0px 10px 10px;
+    margin-bottom: 10px;
 }
 
 
@@ -23,13 +28,19 @@ div.main {
 }
 
 nav {
-    width: 20%;
-    height: 90vh;
-    border: solid blue 1px;
+    width: 50vw;
+    height: calc(92vh - 47px);
+    border: 3px solid white;
+    border-radius: 10px;
+    margin-right: 20px;;
+    position: sticky;
+    top: 10px;
 }
 
-main {
-    border: solid red 1px;
+
+header form{
+    margin:10px;
+
 }
 
 form#loginForm{
@@ -49,9 +60,11 @@ form#loginForm input{
 
 
 div#signin {
-    width: fit-content;
-    min-width: 20%;
-    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 div#signin form {
@@ -65,6 +78,14 @@ div#signin input {
     margin-bottom: 10px;
 }
 
+div#divFormulaire {
+    height: calc(100vh - 8px);
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 div#sexe {
     display: flex;
@@ -73,7 +94,12 @@ div#sexe {
 }
 
 div#filAriane{
-    border: solid black 1px;
+    padding: 0px 10px;
+    border-bottom: 3px solid white;
+}
+
+div#hierarchie{
+    padding: 0px 10px;
 }
 
 input{
