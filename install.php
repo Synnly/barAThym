@@ -28,8 +28,8 @@
     $sql="DROP TABLE IF EXISTS Boisson;
         CREATE TABLE Boisson (
             titreBoisson VARCHAR(150) PRIMARY KEY,
-            ingredients VARCHAR(800),
-            indexIngredients VARCHAR(200)
+            ingredients VARCHAR(200),
+            preparation VARCHAR(800)
         );
     ";
 
@@ -37,17 +37,13 @@
 
         $titreBoisson = addslashes($Boisson['titre']);
         $ingredients = preg_replace('/&quot;/', '"', addslashes($Boisson['ingredients']));
-        $indexIngredients = "";
-
-        foreach($Boisson['index'] as $ingredient){
-            $indexIngredients = $indexIngredients.addslashes($ingredient).",";
-        }
-        $indexIngredients = substr($indexIngredients, 0, -1);
-
-        $sql=$sql."INSERT INTO  Boisson VALUES ('$titreBoisson','$ingredients','$indexIngredients');";
+        $preparation = preg_replace('/&quot;/', '"', addslashes($Boisson['preparation']));
+        $preparation = preg_replace('/;/', ':', addslashes($Boisson['preparation']));
+        $sql=$sql."INSERT INTO  Boisson VALUES ('$titreBoisson','$ingredients','$preparation');";
     }
 
     foreach(explode(';',$sql) as $Requete) {
+        echo $Requete."<br/><br/>";
         if($Requete != "") query($mysqli,$Requete);
     }
 
@@ -109,8 +105,8 @@
     //Creation de la table Utilisateurs
     $sql="DROP TABLE IF EXISTS Utilisateurs;
         CREATE TABLE Utilisateurs (
-            login VARCHAR(50) PRIMARY KEY,
-            password VARCHAR(150) NOT NULL,
+            login VARCHAR(255) PRIMARY KEY,
+            password VARCHAR(255) NOT NULL,
             nom VARCHAR(50),
             prenom VARCHAR(20),
             sexe VARCHAR(20),
