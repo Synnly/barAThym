@@ -9,16 +9,36 @@ body {
 }
 
 header {
-    width: 100%;
+    width: calc(100% - 60px);
     display: flex;
     flex-direction: row;
     align-items: start;
     border: 3px solid white;
     border-top: none;
     border-radius: 0px 0px 10px 10px;
+    padding: 30px 30px;
     margin-bottom: 10px;
 }
 
+main {
+    display: flex;
+    width: 80%;
+}
+
+
+nav {
+    width: 20%;
+    border: 3px solid white;
+    border-radius: 10px;
+    margin-right: 20px;;
+    position: sticky;
+    top: 10px;
+}
+
+input{
+    width: 100%;
+    margin-bottom: 15px;
+}
 
 div.main {
     width: 100%;
@@ -27,31 +47,20 @@ div.main {
     align-items: start;
 }
 
-nav {
-    width: 50vw;
-    height: calc(92vh - 47px);
-    border: 3px solid white;
-    border-radius: 10px;
-    margin-right: 20px;;
-    position: sticky;
-    top: 10px;
-}
-
-
 header form{
-    margin:10px;
-
-}
-
-form#loginForm{
-    width: 50%;
-    height: 8vh;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
 }
 
+header p{
+    margin: 0px;
+}
+
+header input, header button {
+    height: 100%;
+}
 
 form#loginForm input{
     width: fit-content;
@@ -101,10 +110,3 @@ div#filAriane{
 div#hierarchie{
     padding: 0px 10px;
 }
-
-input{
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-
