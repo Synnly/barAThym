@@ -43,7 +43,6 @@
     }
 
     foreach(explode(';',$sql) as $Requete) {
-        echo $Requete."<br/><br/>";
         if($Requete != "") query($mysqli,$Requete);
     }
 
