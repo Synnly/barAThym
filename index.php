@@ -109,17 +109,55 @@
                         }
                         //On vérifie si les recettes ajoutées sont dejà dans les recettes affichées
                         foreach($recettesTemp as $recette){
-                            if(!in_array($recettes,$recette)){
-                                array_push($recettes,$recette);
+                            $dejaPresent = false;
+                            if(sizeof($recettes)>0){
+                                foreach($recettes as $boisson){
+                                    if($recette['titreBoisson'] == $boisson['titreBoisson']) $dejaPresent=true;
+                                }
                             }
+                            if(!$dejaPresent) array_push($recettes,$recette);
                         }
                     }
                 }
+                $coupable;
+                
+                // $query = "SELECT titreBoisson FROM Boisson";
+                // $resultat = $mysqli->query($query);
+                // while($res = $resultat->fetch_assoc()){
+                //     $boug = false;
+                //     foreach($recettes as $boisson){
+                //         if($boisson['titreBoisson'] == $res['titreBoisson']) $boug = true; 
+                //     }
+                //     if(!$boug) echo $res['titreBoisson'];
+                // }
+                
+                // print_r($recettes);
+                echo '<table>';
+                echo '<tr>';
+                $compteur = 0;
                 //Affichage des recettes
-                echo 'TitreBoisson :<br>'.$recettes[0]['titreBoisson'].'<br>';
-                echo 'Ingredients :<br>'.$recettes[0]['ingredients'].'<br>';
-                echo 'Préparation :<br>'.$recettes[0]['preparation'].'<br>';
+                foreach($recettes as $boisson){
+                    if($compteur % 3 == 0 && $compteur != 0) echo '</tr><tr>';
+                    echo '<td><div class = "boisson">';
+                    $titrePhoto = $boisson['titreBoisson'];
+                    //ON RETIRE LES ACCENTS ET LES ESPACES PARCE QUE SINON CA MARCHE PAS + ON AJOUTE .JPG
+                    $titrePhoto = iconv('UTF-8', 'ASCII//TRANSLIT', $titrePhoto);
+                    $titrePhoto = preg_replace('/\s/', '_', $titrePhoto);
+                    $titrePhoto = $titrePhoto.'.jpg';
+                    $photo = fopen("Photos/".$titrePhoto,"r");
 
+                    if($photo){
+                        fclose($photo);
+                    }
+                    echo'</div></td>';
+                    $compteur++;
+
+                }
+                echo'</tr>';
+                // echo 'TitreBoisson :<br>'.$recettes[0]['titreBoisson'].'<br>';
+                // echo 'Ingredients :<br>'.$recettes[0]['ingredients'].'<br>';
+                // echo 'Préparation :<br>'.$recettes[0]['preparation'].'<br>';
+                echo '</table>';
                 mysqli_close($mysqli);
             ?>
         </main>
