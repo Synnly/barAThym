@@ -25,7 +25,7 @@
 
         if($connecte) echo "<button onClick=\"deconnecter()\">Deconnection</button>";
 
-        echo "<form action=\"panier.php\" id=\"panierForm\">
+        echo "<form action=\"panier.php\">
                         <button type=\"submit\">Panier</button> 
                     </form>
                 </div></td>
@@ -56,8 +56,8 @@
                 
         if($connecte) echo "<button onClick=\"deconnecter()\">Deconnection</button>";
 
-        echo "<form action=\"panier.php\" id=\"panierForm\">
-                        <button type=\"submit\">Panier</button> 
+        echo "<form action=\"index.php\">
+                        <button type=\"submit\">Accueil</button> 
                     </form>
                 </div></td>
             </tr></table>";
