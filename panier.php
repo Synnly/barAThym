@@ -8,6 +8,7 @@
     <title>Bar à thym</title>
     <link rel="stylesheet" href="styles/stylePanier.css">
     <script type="text/javascript" src="jsFonctions/fonctionsPanier.js"></script>
+    <script type="text/javascript" src="jsFonctions/fonctions.js"></script>
 </head>
 <body>
     <header>

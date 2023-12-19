@@ -120,6 +120,9 @@ div#hierarchie{
 div#headerGauche{
     display: flex;
 }
+div#headerGauche p{
+    font-size: xx-large;
+}
 
 div#headerDroite{
     display: flex;

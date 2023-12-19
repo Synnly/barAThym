@@ -1,4 +1,5 @@
 var xhr1 = new XMLHttpRequest(); var xhr2 = new XMLHttpRequest();
+var xhr3 = new XMLHttpRequest();
 
 function afficherSousCategorie(ingredient){
     xhr1.onreadystatechange = stateChanged(xhr1, 'hierarchie');
@@ -15,6 +16,14 @@ function afficherFilAriane(ingredient){
 function refreshHierarchie(ingredient){
     afficherFilAriane(ingredient);
     afficherSousCategorie(ingredient);
+}
+
+function deconnecter(){
+    xhr3.onreadystatechange = stateChanged(xhr3, '');
+    xhr3.open("GET","phpFonctions/deconnecter.php", true);
+    xhr3.send(null);
+    document.cookie = "login= ; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    window.location = window.location.href;
 }
 
 function stateChanged(xhr, name){ 

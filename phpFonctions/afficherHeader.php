@@ -5,7 +5,8 @@
                     <td><div id=\"headerGauche\">";
 
         if($connecte){  // Si connecté, affichage du login
-            echo "<p>Bienvenue $login</p>";
+            echo "<p>Bienvenue <b>$login</b></p>";
+                
         }
         else{   // Sinon, affichage du formulaire de connection
             echo "<form method=\"post\" id=\"loginForm\">
@@ -20,11 +21,14 @@
                 </form>";
         }
         echo "</div></td>
-            <td><div id=\"headerDroite\">
-                <form action=\"panier.php\" id=\"panierForm\">
-                    <button type=\"submit\">Panier</button> 
-                </form>
-            </div></td>
+                <td><div id=\"headerDroite\">";
+
+        if($connecte) echo "<button onClick=\"deconnecter()\">Deconnection</button>";
+
+        echo "<form action=\"panier.php\" id=\"panierForm\">
+                        <button type=\"submit\">Panier</button> 
+                    </form>
+                </div></td>
             </tr></table>";
     }
 
@@ -33,7 +37,7 @@
                     <td><div id=\"headerGauche\">";
 
         if($connecte){  // Si connecté, affichage du login
-            echo "<p>Bienvenue $login</p>";
+            echo "<p>Bienvenue <b>$login</b></p>";
         }
         else{   // Sinon, affichage du formulaire de connection
             echo "<form method=\"post\" id=\"loginForm\">
@@ -48,11 +52,14 @@
                 </form>";
         }
         echo "</div></td>
-            <td><div id=\"headerDroite\">
-                <form action=\"index.php\" id=\"panierForm\">
-                    <button type=\"submit\">Accueil</button> 
-                </form>
-            </div></td>
+                <td><div id=\"headerDroite\">";
+                
+        if($connecte) echo "<button onClick=\"deconnecter()\">Deconnection</button>";
+
+        echo "<form action=\"panier.php\" id=\"panierForm\">
+                        <button type=\"submit\">Panier</button> 
+                    </form>
+                </div></td>
             </tr></table>";
     }
 

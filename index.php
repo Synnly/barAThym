@@ -17,6 +17,7 @@
 
             if(isset($_COOKIE['login'])){                       // Utilisateur connecté
                 afficherHeader($_COOKIE['login'], true);
+                unset($_POST['submitConnect']);
             }
             else{
                 if($_POST['submitConnect'] == "Connexion"){  // Demande de connexion envoyée
