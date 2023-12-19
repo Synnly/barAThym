@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar à thym</title>
     <link rel="stylesheet" href="styles/stylePanier.css">
-    <script type="text/javascript" src="fonctions.js"></script>
+    <script type="text/javascript" src="fonctionsPanier.js"></script>
 </head>
 <body>
     <header>
         <?php
             include "configBD.php";
             if(isset($_COOKIE['login'])){                       // Utilisateur connecté
-                echo "<p>Bienvenue ".$_POST['login']."</p>
+                echo "<p>Bienvenue ".$_COOKIE['login']."</p>
                         <form action=\"index.php\" id=\"panierForm\">
                             <button type=\"submit\">Accueil</button> 
                         </form>";
@@ -70,68 +70,15 @@
     <main>
         <?php
 
-            try{
-                $pdo = new PDO('mysql:host='.$_IPBD.';dbname='.$_NAMEBD, $_USERNAME, $_PASSWORD);
-            }
-            catch(Exception $e){
-                exit($e->getMessage());
-            }
-
-            // Requete des boissons dans le panier
-            $sql="SELECT b.* FROM Panier p, Boisson b WHERE p.login = ? and b.titreBoisson = p.titreBoisson;";
-            $resultat = $pdo->prepare($sql);
-
-            // Affichage du login s'il est connecté
             if(isset($_COOKIE['login'])){
-                $resultat->execute([$_COOKIE['login']]);
+                $login = $_COOKIE['login'];
             }
             elseif(isset($_POST['login'])){
-                $resultat->execute([$_POST['login']]);
+                $login = $_POST['login'];
             }
 
-            echo "<table><tr>";
-            $compteur = 0;
-
-            foreach ($resultat as $row){
-                if($compteur % 3 == 0 && $compteur > 0) echo "</tr><tr>";
-                echo "<td>";
-
-                // Transformation du titre de la boisson
-                $titreBoisson = preg_replace("/\s/", "_", $row['titreBoisson']);
-                $titreBoisson = "Photos/".$titreBoisson.".jpg";
-
-                // Affichage de l'entete
-                echo "<div class=\"boissonEnTete\">";
-
-                    //Affichage de l'image
-                if(fopen($titreBoisson, 'r')){
-                    echo "<img src=\"$titreBoisson\">";
-                }
-                else{
-                    echo "<img src=\"Photos/glass.png\">";
-                }
-
-                echo "<div class=\"boissonEnTeteTexte\">
-                        <p>".$row['titreBoisson']."</p>
-                        <button>Retirer</button>
-                    </div>
-                    </div>";
-
-                // Affichage des ingrédients
-                echo "<br/>Ingrédients : <ul>";
-                foreach(explode("|", $row['ingredients']) as $ingredient){
-                    echo "<li>$ingredient</li>";
-                }
-                echo "</ul>";  
-                
-                // Affichage de la recette
-                echo "Préparation : <br>".$row['preparation'];
-                echo "</td>";   
-                $compteur++;
-            }
-
-            echo "</tr></table>";
-            $pdo = NULL;
+            echo "<div id=\"panier\"></div>";
+            echo "<script>afficherPanier('$login');</script>"
         ?>
     </main>
 </body>

@@ -1,5 +1,4 @@
-var xhr1 = new XMLHttpRequest();
-var xhr2 = new XMLHttpRequest();
+var xhr1 = new XMLHttpRequest(); var xhr2 = new XMLHttpRequest();
 
 function afficherSousCategorie(ingredient){
     xhr1.onreadystatechange = stateChanged(xhr1, 'hierarchie');
