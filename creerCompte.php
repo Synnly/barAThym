@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar à thym</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="import" href="fonctions.js">
 </head>
 <body>
@@ -96,19 +96,19 @@
                         // Ajout de l'utilisateur dans la base de données
                         $login = $_POST['login'];
                         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                        $nom = $_POST['nom'] == '' ? "NULL" : "'".$_POST['nom']."'";
-                        $prenom = $_POST['prenom'] == '' ? "NULL" : "'".$_POST['prenom']."'";
-                        $sexe = $_POST['sexe'] == '' ? "NULL" : "'".$_POST['sexe']."'";
-                        $email = $_POST['email'] == '' ? "NULL" : "'".$_POST['email']."'";
-                        $dateNaissance = $_POST['dateNaissance'] == '' ? "NULL" : "'".$_POST['dateNaissance']."'";
-                        $adresse = $_POST['adresse'] == '' ? "NULL" : "'".$_POST['adresse']."'";
-                        $codePostal = $_POST['codePostal'] == '' ? "NULL" : "'".$_POST['codePostal']."'";
-                        $ville = $_POST['ville'] == '' ? "NULL" : "'".$_POST['ville']."'";
-                        $telephone = $_POST['telephone'] == '' ? "NULL" : "'".$_POST['telephone']."'";
+                        $nom = $_POST['nom'] == '' ? NULL : $_POST['nom'];
+                        $prenom = $_POST['prenom'] == '' ? NULL : $_POST['prenom'];
+                        $sexe = $_POST['sexe'] == '' ? NULL : $_POST['sexe'];
+                        $email = $_POST['email'] == '' ? NULL : $_POST['email'];
+                        $dateNaissance = $_POST['dateNaissance'] == '' ? NULL : $_POST['dateNaissance'];
+                        $adresse = $_POST['adresse'] == '' ? NULL : $_POST['adresse'];
+                        $codePostal = $_POST['codePostal'] == '' ? NULL : $_POST['codePostal'];
+                        $ville = $_POST['ville'] == '' ? NULL : $_POST['ville'];
+                        $telephone = $_POST['telephone'] == '' ? NULL : $_POST['telephone'];
 
-                        $sql = "INSERT INTO Utilisateurs VALUES ('$login','$password',$nom,$prenom,$sexe,$email,$dateNaissance,$adresse,$codePostal,$ville,$telephone);";
-                        $mysqli = new mysqli($_IPBD, $_USERNAME, $_PASSWORD, $_NAMEBD);
-                        $mysqli->query($sql);
+                        $sql = "INSERT INTO Utilisateurs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                        $res = $pdo->prepare($sql);
+                        $res->execute([$login,$password,$nom,$prenom,$sexe,$email,$dateNaissance,$adresse,$codePostal,$ville,$telephone]);
                         header("Location: index.php");  // Redirection vers la page principale
                     }
                     unset($_POST['submitCreate']);
