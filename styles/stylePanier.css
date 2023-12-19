@@ -19,6 +19,7 @@ table#boissons button {
     font-size: large;
     padding: 5px;
     margin-left: 10px;
+    height: fit-content;
 }
 
 table#boissons td {
@@ -38,10 +39,12 @@ div.boissonEnTete {
 div.boissonEnTeteTexte{
     display: flex;
     flex-direction: row;
+    align-items: center;
     height: auto;
 }
 
 div.boissonEnTeteTexte p{
     margin: 0;
     font-size: xx-large;
+    text-align: right;
 }
