@@ -20,11 +20,14 @@ header {
     margin-bottom: 10px;
 }
 
+img {
+    max-height: 20vh;
+}
+
 main {
     display: flex;
     width: 80%;
 }
-
 
 nav {
     width: 20%;
@@ -40,11 +43,8 @@ input{
     margin-bottom: 15px;
 }
 
-div.main {
+table {
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: start;
 }
 
 header form{
@@ -59,14 +59,20 @@ header p{
 }
 
 header input, header button {
-    height: 100%;
+    font-size: large;
+    padding: 5px;
+}
+
+button {
+    font-size: large;
+    padding: 5px;
+    margin-left: 10px;
 }
 
 form#loginForm input{
     width: fit-content;
-    margin: 0 50px 0 10px;
+    margin: 0 30px 0 10px;
 }
-
 
 div#signin {
     width: 100%;
@@ -109,4 +115,24 @@ div#filAriane{
 
 div#hierarchie{
     padding: 0px 10px;
+}
+
+div#headerGauche{
+    display: flex;
+}
+div#headerGauche p{
+    font-size: xx-large;
+}
+
+div#headerDroite{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+div.main {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
 }
