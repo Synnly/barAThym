@@ -7,17 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar à thym</title>
     <link rel="stylesheet" href="styles/style.css">
-    <script type="text/javascript" src="fonctions.js"></script>
+    <script type="text/javascript" src="jsFonctions/fonctions.js"></script>
 </head>
 <body>
     <header>
         <?php
+            include "phpFonctions/afficherHeader.php";
             include "configBD.php";
+
             if(isset($_COOKIE['login'])){                       // Utilisateur connecté
-                echo "<p>Bienvenue ".$_COOKIE['login']."</p>
-                        <form action=\"panier.php\" id=\"panierForm\">
-                            <button type=\"submit\">Panier</button> 
-                        </form>";
+                afficherHeader($_COOKIE['login'], true);
             }
             else{
                 if($_POST['submitConnect'] == "Connexion"){  // Demande de connexion envoyée
@@ -38,10 +37,7 @@
                     } 
 
                     if (password_verify($_POST['password'], $pswd)){   // Le mot de passe correspond
-                        echo "<p>Bienvenue ".$_POST['login']."</p>
-                                <form action=\"panier.php\" id=\"panierForm\">
-                                    <button type=\"submit\">Panier</button> 
-                                </form>";
+                        afficherHeader($_POST['login'], true);
                         setcookie("login", $_POST['login'], time()+3600);
                     }
                     else{
@@ -50,22 +46,9 @@
                     unset($_POST['submitConnect']);
                 }
                 else{                                               // Affichage du formulaire de connection
-                    echo "<form method=\"post\" id=\"loginForm\">
-                            <legend>Login</legend>
-                            <input type=\"text\" name=\"login\">
-                            <legend>Mot de passe</legend>
-                            <input type=\"password\" name=\"password\">
-                            <input type=\"submit\" value=\"Connexion\" name=\"submitConnect\">
-                        </form>
-                        <form action=\"creerCompte.php\" id=\"signinForm\">
-                            <button type=\"submit\">Créer un compte</button>
-                        </form>
-                        <form action=\"panier.php\" id=\"panierForm\">
-                            <button type=\"submit\">Panier</button> 
-                        </form>";
+                    afficherHeader("", false);
                 }
             }
-
         ?>
     </header>
     <div class="main">

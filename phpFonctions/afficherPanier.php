@@ -23,7 +23,7 @@
 
     $resultat->execute([$login]);
 
-    echo "<table><tr>";
+    echo "<table id=\"boissons\"><tr>";
     $compteur = 0;
 
     // Affichage des boissons

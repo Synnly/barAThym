@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar à thym</title>
     <link rel="stylesheet" href="styles/style.css">
-    <link rel="import" href="fonctions.js">
+    <link rel="import" href="jsFonctions/fonctions.js">
 </head>
 <body>
     <?php 
