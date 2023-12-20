@@ -42,7 +42,10 @@
                         setcookie("login", $_POST['login'], time()+3600);
                     }
                     else{
-                        echo "<p>Erreur de connexion</p>";
+                        echo "<p>Erreur de connexion</p>
+                                <form action=\"index.php\">
+                                    <button type=\"submit\">Accueil</button> 
+                                </form>";
                     }
                     unset($_POST['submitConnect']);
                 }
