@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <?php
-    include "../configBD.php"; 
+    include "../configBD.php";
     $html = "";
 
     // Connexion

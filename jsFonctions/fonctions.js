@@ -1,5 +1,6 @@
 var xhr1 = new XMLHttpRequest(); var xhr2 = new XMLHttpRequest();
-var xhr3 = new XMLHttpRequest();
+var xhr3 = new XMLHttpRequest(); var xhr4 = new XMLHttpRequest();
+var xhr5 = new XMLHttpRequest(); var xhr6 = new XMLHttpRequest();
 
 function afficherSousCategorie(ingredient){
     xhr1.onreadystatechange = stateChanged(xhr1, 'hierarchie');
@@ -26,7 +27,36 @@ function deconnecter(){
     window.location = window.location.href;
 }
 
-function stateChanged(xhr, name){ 
+function remplirListeContient(id){
+    xhr4.onreadystatechange = stateChanged(xhr4, 'recherche');
+    if(id != null) {
+        let ingredient = document.getElementById(id.toString()).value;
+        if(id === "rechercheContient"){
+            xhr4.open("GET","phpFonctions/inclureIngredient.php?inclure="+ingredient+"&exclure=", true);
+        }
+        else if(id === "rechercheNeContientPas"){
+            xhr4.open("GET","phpFonctions/inclureIngredient.php?inclure=&exclure="+ingredient, true);
+        }
+    }
+    else {
+        xhr4.open("GET", "phpFonctions/inclureIngredient.php?inclure=&exclure=", true);
+    }
+    xhr4.send(null);
+
+    // Fonctionne alors que la condition devrait être dans l'autre sens
+    // ??????????????????????
+    if ((id === '')) {
+        document.getElementById(id).value = "";
+    }
+}
+
+function resetListe(nomListe){
+    xhr5.onreadystatechange = stateChanged(xhr5, 'champsRecherche');
+    xhr5.open("GET","phpFonctions/reset.php?nomListe="+nomListe, true);
+    xhr5.send(null);
+}
+
+function stateChanged(xhr, name){
     return function(){
         if(xhr.readyState == 4 && xhr.status == 200){
             document.getElementById(name).innerHTML = xhr.responseText;
@@ -37,4 +67,5 @@ function stateChanged(xhr, name){
 window.onload = function(){
     afficherSousCategorie("Aliment");
     afficherFilAriane("Aliment");
+    remplirListeContient();
 }

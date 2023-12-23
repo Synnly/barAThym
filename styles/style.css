@@ -31,11 +31,9 @@ main {
 
 nav {
     width: 20%;
-    border: 3px solid white;
-    border-radius: 10px;
-    margin-right: 20px;;
-    position: sticky;
     top: 10px;
+    position: sticky;
+    margin-right: 20px;
 }
 
 input{
@@ -67,6 +65,11 @@ button {
     font-size: large;
     padding: 5px;
     margin-left: 10px;
+}
+
+div#nav{
+    border: 3px solid white;
+    border-radius: 10px;
 }
 
 form#loginForm input{
@@ -120,6 +123,7 @@ div#hierarchie{
 div#headerGauche{
     display: flex;
 }
+
 div#headerGauche p{
     font-size: xx-large;
 }
@@ -130,9 +134,27 @@ div#headerDroite{
     justify-content: end;
 }
 
+div#recherche {
+    margin-top: 10px;
+}
+
+div#recherche input{
+    width: 90%;
+}
+
 div.main {
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: start;
+}
+
+div.inputRecherche{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+div.inputRecherche input {
+    margin-bottom: 0px;
 }

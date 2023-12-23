@@ -49,16 +49,38 @@
                     }
                     unset($_POST['submitConnect']);
                 }
-                else{                                               // Affichage du formulaire de connection
+                else {                                               // Affichage du formulaire de connection
                     afficherHeader("", false);
                 }
             }
         ?>
     </header>
     <div class="main">
-        <nav id="nav">
-            <div id="filAriane"></div>
-            <div id="hierarchie"></div>
+        <nav>
+            <div id="nav">
+                <div id="filAriane"></div>
+                <div id="hierarchie"></div>
+            </div>
+            <div id="recherche">
+                <div id="datalist"></div>
+                <div id="champsRecherche">
+                    <label for="rechercheContient">Ingrédients à inclure</label>
+                    <div class="inputRecherche">
+                        <input type="text" list="listeContient" id="rechercheContient">
+                        <button onclick="remplirListeContient('rechercheContient')">Inclure</button>
+                        <button onclick="resetListe('inclureIngredients')">Reset</button>
+                    </div>
+                    <ul></ul>
+
+                    <label for="rechercheNeContientPas">Ingrédients à exclure</label>
+                    <div class="inputRecherche">
+                        <input type="text" list="listeNeContientPas" id="rechercheNeContientPas">
+                        <button onclick="remplirListeContient('rechercheNeContientPas')">Exclure</button>
+                        <button onclick="resetListe('exclureIngredients')">Reset</button>
+                    </div>
+                    <ul></ul>
+                </div>
+            </div>
         </nav>
         <main>
             Vestibulum eget tellus sit amet erat ullamcorper semper. Sed a faucibus enim. Vestibulum ut bibendum lacus, et pharetra purus. Integer convallis velit nec metus lobortis, sed mattis dolor efficitur. Nam at lacus nisl. Vestibulum euismod interdum eros, nec molestie ligula aliquam a. Aliquam augue dolor, fermentum non nisl semper, blandit aliquet mauris.
@@ -75,7 +97,7 @@
             Phasellus ornare, quam et porttitor elementum, ante justo mollis libero, ac tincidunt nisl eros hendrerit turpis. Sed porta massa mauris, quis lacinia nunc condimentum vitae. Etiam vehicula blandit orci vel varius. Vivamus vitae venenatis eros. Fusce euismod nec sapien vitae auctor. Praesent auctor semper risus. Suspendisse quis augue interdum massa euismod molestie et ac nibh. Nulla egestas odio sed purus viverra euismod. Fusce placerat orci dolor, non vehicula quam ornare eget. Donec maximus, quam eu cursus consectetur, diam nisl tempus ligula, id ullamcorper felis lectus in leo. Donec a ipsum rhoncus mi dictum porta. Suspendisse vehicula ante eu quam condimentum, a mattis diam consequat.
             Nullam vitae risus eget est cursus maximus vitae quis ex. Nam cursus leo sem, venenatis varius quam sollicitudin ac. Quisque finibus tortor non lacus aliquet, id maximus erat venenatis. Aenean dictum tellus metus, et maximus risus ullamcorper sed. Integer ut accumsan felis, ac viverra felis. Suspendisse faucibus ac arcu at blandit. Ut est nibh, faucibus non turpis vitae, commodo ullamcorper quam. Aenean vitae tincidunt dui. Integer venenatis pellentesque ante vel sodales. Aliquam erat volutpat. Nulla accumsan maximus lorem, sed facilisis ex aliquam porttitor. Nunc elementum urna id ultricies faucibus. Maecenas sit amet orci scelerisque, congue leo eu, laoreet nisi. Pellentesque sit amet enim vitae lacus varius cursus ac non erat. Donec sit amet dolor erat.
             Aenean vitae ligula eget dui placerat consequat non sit amet mi. Pellentesque at auctor justo. Nunc sed augue at velit bibendum tempor ut sit amet libero. Nam aliquam metus nibh, ut vestibulum libero hendrerit eget. Quisque iaculis iaculis nulla. Cras quis mattis felis. Mauris maximus neque sit amet velit porta, in volutpat tellus dictum. Quisque quis purus dolor. Etiam velit ligula, venenatis sed sem at, malesuada aliquet tortor. Mauris fringilla quam non libero ornare, ac commodo dui semper. Quisque rutrum sapien eget tempus consectetur. Etiam ultricies, est non vestibulum imperdiet, mauris augue eleifend est, lacinia tristique nisl sem at velit. Etiam quis sem sit amet enim pulvinar iaculis ac vel nulla.
-            Vivamus ac pellentesque ex, sodales aliquam nisl. Aenean volutpat nibh in aliquet iaculis. Duis pellentesque elit et orci vulputate tempus. In facilisis tristique egestas. Nullam sed maximus ex. Curabitur sit amet placerat velit, non dictum sapien. Sed tincidunt quam vitae posuere faucibus. Proin at iaculis ligula. Ut convallis quam elit, id laoreet sapien rutrum eu. Mauris congue eros magna, et pulvinar lacus bibendum non. Sed malesuada lorem vel aliquet consequat. Sed commodo diam eu egestas laoreet. Donec mollis enim sed quam luctus molestie. 
+            Vivamus ac pellentesque ex, sodales aliquam nisl. Aenean volutpat nibh in aliquet iaculis. Duis pellentesque elit et orci vulputate tempus. In facilisis tristique egestas. Nullam sed maximus ex. Curabitur sit amet placerat velit, non dictum sapien. Sed tincidunt quam vitae posuere faucibus. Proin at iaculis ligula. Ut convallis quam elit, id laoreet sapien rutrum eu. Mauris congue eros magna, et pulvinar lacus bibendum non. Sed malesuada lorem vel aliquet consequat. Sed commodo diam eu egestas laoreet. Donec mollis enim sed quam luctus molestie.
         </main>
     </div>
 </body>
