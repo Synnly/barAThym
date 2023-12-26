@@ -1,6 +1,7 @@
 var xhr1 = new XMLHttpRequest(); var xhr2 = new XMLHttpRequest();
 var xhr3 = new XMLHttpRequest(); var xhr4 = new XMLHttpRequest();
 var xhr5 = new XMLHttpRequest(); var xhr6 = new XMLHttpRequest();
+var xhr7 = new XMLHttpRequest(); var xhr8 = new XMLHttpRequest();
 
 function afficherSousCategorie(ingredient){
     xhr1.onreadystatechange = stateChanged(xhr1, 'hierarchie');
@@ -17,6 +18,7 @@ function afficherFilAriane(ingredient){
 function refreshHierarchie(ingredient){
     afficherFilAriane(ingredient);
     afficherSousCategorie(ingredient);
+    afficherRecettes();
 }
 
 function deconnecter(){
@@ -54,6 +56,19 @@ function resetListe(nomListe){
     xhr5.onreadystatechange = stateChanged(xhr5, 'champsRecherche');
     xhr5.open("GET","phpFonctions/reset.php?nomListe="+nomListe, true);
     xhr5.send(null);
+}
+
+function afficherRecettes(){
+    xhr7.onreadystatechange = stateChanged(xhr7, 'recettes');
+    xhr7.open("GET","phpFonctions/afficherRecettes.php", true);
+    xhr7.send(null);
+}
+
+function ajouterBoissonPanier(login, boisson){
+    xhr8.onreadystatechange = stateChanged(xhr8, '');
+    xhr8.open("GET","phpFonctions/ajouterBoissonPanier.php?login="+login+"&boisson="+boisson, true);
+    xhr8.send(null);
+    afficherPanier('login');
 }
 
 function stateChanged(xhr, name){
