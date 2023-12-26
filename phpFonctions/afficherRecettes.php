@@ -37,7 +37,7 @@
 
             //Ajout dans la liste des aliments à visiter
             foreach($sousCatAct as $sousCat){
-                array_push($Avisiter,$sousCat);
+                $Avisiter[] = $sousCat;
             } 
             
         }else{
@@ -48,7 +48,7 @@
             $resultat = $mysqli->query($query);
             //Parcours du resultat
             while($nuplet = $resultat->fetch_assoc()){
-                array_push($recettesTemp,$nuplet);
+                $recettesTemp[] = $nuplet;
             
             }
             //On vérifie si les recettes ajoutées sont dejà dans les recettes affichées
@@ -59,7 +59,7 @@
                         if($recette['titreBoisson'] == $boisson['titreBoisson']) $dejaPresent=true;
                     }
                 }
-                if(!$dejaPresent) array_push($recettes,$recette);
+                if(!$dejaPresent) $recettes[] = $recette;
             }
         }
     }
