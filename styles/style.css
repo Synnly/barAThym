@@ -21,7 +21,17 @@ header {
 }
 
 img {
-    max-height: 20vh;
+    max-width: 20vw;
+    height: 20vh;
+    margin : 0;
+}
+table {
+    width: 95%;
+}
+td {
+    vertical-align: top;
+    width: 30%;
+    
 }
 
 main {
