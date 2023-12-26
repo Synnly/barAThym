@@ -25,6 +25,19 @@ main {
     width: 80%;
 }
 
+img {
+    max-width: 20vw;
+    height: 20vh;
+    margin : 0;
+}
+table {
+    width: 95%;
+}
+td {
+    vertical-align: top;
+    width: 30%;
+    padding : 10px;
+}
 
 nav {
     width: 20%;
@@ -110,3 +123,4 @@ div#filAriane{
 div#hierarchie{
     padding: 0px 10px;
 }
+
