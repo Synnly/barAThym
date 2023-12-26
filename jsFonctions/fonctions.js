@@ -27,33 +27,42 @@ function deconnecter(){
     window.location = window.location.href;
 }
 
-function remplirListeContient(id){
-    xhr4.onreadystatechange = stateChanged(xhr4, 'recherche');
+function remplirListes(id){
+    xhr4.onreadystatechange = stateChanged(xhr4, 'datalist');
     if(id != null) {
         let ingredient = document.getElementById(id.toString()).value;
         if(id === "rechercheContient"){
-            xhr4.open("GET","phpFonctions/inclureIngredient.php?inclure="+ingredient+"&exclure=", true);
+            xhr4.open("GET","phpFonctions/remplirListesIngredients.php?inclure="+ingredient+"&exclure=", true);
         }
         else if(id === "rechercheNeContientPas"){
-            xhr4.open("GET","phpFonctions/inclureIngredient.php?inclure=&exclure="+ingredient, true);
+            xhr4.open("GET","phpFonctions/remplirListesIngredients.php?inclure=&exclure="+ingredient, true);
         }
     }
     else {
-        xhr4.open("GET", "phpFonctions/inclureIngredient.php?inclure=&exclure=", true);
+        xhr4.open("GET", "phpFonctions/remplirListesIngredients.php?inclure=&exclure=", true);
     }
     xhr4.send(null);
+    afficherChampsRecherche(id);
+}
+
+function resetListe(id){
+    xhr5.onreadystatechange = stateChanged(xhr5, '');
+    xhr5.open("GET","phpFonctions/reset.php?id="+id, true);
+    xhr5.send(null);
+
+    remplirListes(id);
+}
+
+function afficherChampsRecherche(id){
+    xhr6.onreadystatechange = stateChanged(xhr6, 'champsRecherche');
+    xhr6.open("GET","phpFonctions/afficherChampsRecherche.php", true);
+    xhr6.send(null);
 
     // Fonctionne alors que la condition devrait être dans l'autre sens
     // ??????????????????????
     if ((id === '')) {
         document.getElementById(id).value = "";
     }
-}
-
-function resetListe(nomListe){
-    xhr5.onreadystatechange = stateChanged(xhr5, 'champsRecherche');
-    xhr5.open("GET","phpFonctions/reset.php?nomListe="+nomListe, true);
-    xhr5.send(null);
 }
 
 function stateChanged(xhr, name){
@@ -67,5 +76,5 @@ function stateChanged(xhr, name){
 window.onload = function(){
     afficherSousCategorie("Aliment");
     afficherFilAriane("Aliment");
-    remplirListeContient();
+    remplirListes();
 }

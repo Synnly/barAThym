@@ -63,23 +63,7 @@
             </div>
             <div id="recherche">
                 <div id="datalist"></div>
-                <div id="champsRecherche">
-                    <label for="rechercheContient">Ingrédients à inclure</label>
-                    <div class="inputRecherche">
-                        <input type="text" list="listeContient" id="rechercheContient">
-                        <button onclick="remplirListeContient('rechercheContient')">Inclure</button>
-                        <button onclick="resetListe('inclureIngredients')">Reset</button>
-                    </div>
-                    <ul></ul>
-
-                    <label for="rechercheNeContientPas">Ingrédients à exclure</label>
-                    <div class="inputRecherche">
-                        <input type="text" list="listeNeContientPas" id="rechercheNeContientPas">
-                        <button onclick="remplirListeContient('rechercheNeContientPas')">Exclure</button>
-                        <button onclick="resetListe('exclureIngredients')">Reset</button>
-                    </div>
-                    <ul></ul>
-                </div>
+                <div id="champsRecherche"></div>
             </div>
         </nav>
         <main>
