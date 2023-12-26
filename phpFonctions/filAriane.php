@@ -10,7 +10,7 @@
     if(isset($_SESSION['filAriane'])){
         $filAriane = $_SESSION['filAriane'];
         if(array_search($_GET['ingredient'], $filAriane) === false){
-            array_push($filAriane, $_GET['ingredient']);
+            $filAriane[] = $_GET['ingredient'];
         }
         else{
             $index = array_search($_GET['ingredient'], $filAriane);

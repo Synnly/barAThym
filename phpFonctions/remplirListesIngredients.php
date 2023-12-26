@@ -8,8 +8,8 @@
     if(!isset($_SESSION['exclureIngredients'])) $_SESSION['exclureIngredients'] = array();
 
     // Ajout de l'ingrédient dans la liste correspondante
-    if(!$_GET['inclure']=="") array_push($_SESSION['inclureIngredients'], $_GET['inclure']);
-    if(!$_GET['exclure']=="") array_push($_SESSION['exclureIngredients'], $_GET['exclure']);
+    if(!$_GET['inclure']=="") $_SESSION['inclureIngredients'][] = $_GET['inclure'];
+    if(!$_GET['exclure']=="") $_SESSION['exclureIngredients'][] = $_GET['exclure'];
 
     // Initialisations
     $categorie = $_SESSION['filAriane'][count($_SESSION['filAriane'])-1];
@@ -41,22 +41,20 @@
                 foreach ($categories as $element){
 
                     // Sous categories exclues
-                    if (in_array($row[1], $listeCategoriesExclues)) array_push($listeCategoriesExclues, $element);
+                    if (in_array($row[1], $listeCategoriesExclues)) $listeCategoriesExclues[] = $element;
 
                     if(!in_array($element, $_SESSION['inclureIngredients']) && !in_array($element, $_SESSION['exclureIngredients']) && !in_array($element, $listeCategoriesExclues)){
-                        if(!in_array($element, $listeIngredientsInclure)) array_push($listeIngredientsInclure, $element);
-                        if(!in_array($element, $listeIngredientsExclure)) array_push($listeIngredientsExclure, $element);
+                        if(!in_array($element, $listeIngredientsInclure)) $listeIngredientsInclure[] = $element;
+                        if(!in_array($element, $listeIngredientsExclure)) $listeIngredientsExclure[] = $element;
                     }
 
                     // Si l'ingrédient a déjà été inclus, on le rajoute quand meme aux possibilités d'exclusion ses sous-catégories
-                    if(!in_array($element, $aVisiter)) array_push($aVisiter, $element);
+                    if(!in_array($element, $aVisiter)) $aVisiter[] = $element;
                 }
             }
         }
         $aVisiter = array_slice($aVisiter, 1, count($aVisiter)-1);
     }
-
-    // TODO : Enlever de la datalist des inclus les sous categories des ingredients deja inclus
 
     // Remplissage de la datalist des ingrédients pouvant etre inclus
     echo "<div id=\"datalist\"><datalist id=\"listeContient\">";
