@@ -66,9 +66,10 @@ function afficherRecettes(){
 
 function ajouterBoissonPanier(login, boisson){
     xhr8.onreadystatechange = stateChanged(xhr8, '');
+    //console.log(login);
+    //console.log(boisson);
     xhr8.open("GET","phpFonctions/ajouterBoissonPanier.php?login="+login+"&boisson="+boisson, true);
     xhr8.send(null);
-    afficherPanier('login');
 }
 
 function stateChanged(xhr, name){

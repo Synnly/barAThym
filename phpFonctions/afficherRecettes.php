@@ -9,6 +9,14 @@
     $alimentActuel;
     $sousCatAct=[];
 
+    // Recuperation du login
+    if(isset($_COOKIE['login'])){
+        $login = $_COOKIE['login'];
+    }
+    elseif(isset($_POST['login'])){
+        $login = $_POST['login'];
+    }
+
     //Remplissage du tableau des recettes à afficher
     while( ($alimentActuel = array_pop($Avisiter))){
         //Echappement des guillemets
@@ -74,7 +82,8 @@
             $titrePhoto = "glass.png";
         }
         //Affichage de l'image
-        echo '<img src="Photos/'.$titrePhoto.'"/>';
+        echo '<img src="Photos/'.$titrePhoto.'"/>
+        <button onClick="ajouterBoissonPanier(\''.$login.'\',\''.$boisson['titreBoisson'].'\')">Ajouter Favoris</button>';
         echo '<br>';
 
         //Affichage du titre de la boisson
