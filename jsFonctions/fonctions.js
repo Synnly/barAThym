@@ -93,7 +93,6 @@ function stateChanged(xhr, name){
         }
     }
 }
-
 window.onload = function(){
     afficherSousCategorie("Aliment");
     afficherFilAriane("Aliment");
