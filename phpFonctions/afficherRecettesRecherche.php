@@ -1,6 +1,28 @@
 <?php session_start() ?>
 <?php
+
     include "../configBD.php";
+
+    /**
+     * Renvoie le taux de correspondance entre les ingrédients dans $ingredients et les ingrédients de la boisson
+     * @param string $titreBoisson La boisson
+     * @param string $ingredients La liste des ingrédients
+     * @return float Le taux de correspondance (entre 0 et 1)
+     */
+    function getPrctCorrespondance($titreBoisson, $ingredients){
+        include "../configBD.php";
+        $mysqli = mysqli_connect($_IPBD,$_USERNAME,$_PASSWORD,$_NAMEBD);
+        $query = "SELECT titreAliment FROM Contient WHERE titreBoisson ='$titreBoisson'";
+        $resultat = $mysqli->query($query);
+
+        $nbIngredients = 0;
+        $totalIngredients = $mysqli->affected_rows;
+        while($row = $resultat->fetch_row()){
+            if(in_array($row[0], $ingredients)) $nbIngredients+=1;
+        }
+        mysqli_close($mysqli);
+        return fdiv($nbIngredients, $totalIngredients);
+    }
 
     // Initialisations
     $dernierAliment = isset($_SESSION['filAriane']) ? end($_SESSION['filAriane']) : 'Aliment';
@@ -124,6 +146,27 @@
         }
         array_shift($aVisiter);
     }
+
+    //
+    if(count($categoriesInclues) > 0) {
+        $correspondanceRecette = array();
+
+        // Creation de la requete
+        $mysqli = mysqli_connect($_IPBD, $_USERNAME, $_PASSWORD, $_NAMEBD);
+        $sql = "SELECT DISTINCT B.* FROM Boisson B, Contient C WHERE C.titreBoisson = B.titreBoisson AND (";
+
+        foreach ($categoriesInclues as $categorie) {
+            $sql .= "titreAliment = '". mysqli_escape_string($mysqli, $categorie)."' OR ";
+        }
+        $sql = substr($sql, 0, -4).")";
+
+        $resultat = $mysqli->query($sql);
+
+        while($row = $resultat->fetch_row()){
+            $correspondanceRecette[] = array(0 => $row, 1 => getPrctCorrespondance($row[0], $categoriesInclues));
+        }
+    }
+
 
 
 
