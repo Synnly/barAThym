@@ -1,5 +1,6 @@
 var xhr = new XMLHttpRequest();
 var xhr2 = new XMLHttpRequest();
+var xhr3 = new XMLHttpRequest();
 
 function afficherPanier(login){
     xhr.onreadystatechange = stateChanged(xhr, 'panier');
@@ -12,6 +13,13 @@ function retirerBoissonPanier(login, boisson){
     xhr2.open("GET","phpFonctions/retirerBoissonPanier.php?login="+login+"&boisson="+boisson, true);
     xhr2.send(null);
     afficherPanier('login');
+}
+
+function retirerBoissonPanierVisiteur(boisson){
+    xhr3.onreadystatechange = stateChanged(xhr3, '');
+    xhr3.open("GET","phpFonctions/retirerBoissonPanier.php?boisson="+boisson, true);
+    xhr3.send(null);
+    afficherPanier(null);
 }
 
 function stateChanged(xhr, name){ 
