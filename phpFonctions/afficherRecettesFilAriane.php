@@ -69,5 +69,5 @@
     }
     mysqli_close($mysqli);
 
-    afficherRecettes($recettes, $login);
+    afficherRecettes($recettes, $login, null);
 ?>
