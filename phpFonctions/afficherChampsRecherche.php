@@ -31,8 +31,4 @@
 
     echo "</ul></div>";
 
-// TODO : Reremplir les listes apres appel
-// TODO : Requete correspondance 100%
-// TODO : Requete correspondance <100%
-
     ?>

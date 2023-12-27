@@ -1,19 +1,17 @@
-var xhr1 = new XMLHttpRequest(); var xhr2 = new XMLHttpRequest();
-var xhr3 = new XMLHttpRequest(); var xhr4 = new XMLHttpRequest();
-var xhr5 = new XMLHttpRequest(); var xhr6 = new XMLHttpRequest();
-var xhr7 = new XMLHttpRequest(); var xhr8 = new XMLHttpRequest();
-var xhr9 = new XMLHttpRequest(); var xhr10 = new XMLHttpRequest();
+
 
 function afficherSousCategorie(ingredient){
-    xhr1.onreadystatechange = stateChanged(xhr1, 'hierarchie');
-    xhr1.open("GET","phpFonctions/hierarchie.php?ingredient="+ingredient, true);
-    xhr1.send(null);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = stateChanged(xhr, 'hierarchie');
+    xhr.open("GET","phpFonctions/hierarchie.php?ingredient="+ingredient, true);
+    xhr.send(null);
 }
 
 function afficherFilAriane(ingredient){
-    xhr2.onreadystatechange = stateChanged(xhr2, 'filAriane');
-    xhr2.open("GET","phpFonctions/filAriane.php?ingredient="+ingredient, true);
-    xhr2.send(null);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = stateChanged(xhr, 'filAriane');
+    xhr.open("GET","phpFonctions/filAriane.php?ingredient="+ingredient, true);
+    xhr.send(null);
 }
 
 function refreshHierarchie(ingredient){
@@ -23,43 +21,47 @@ function refreshHierarchie(ingredient){
 }
 
 function deconnecter(){
-    xhr3.onreadystatechange = stateChanged(xhr3, '');
-    xhr3.open("GET","phpFonctions/deconnecter.php", true);
-    xhr3.send(null);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = stateChanged(xhr, '');
+    xhr.open("GET","phpFonctions/deconnecter.php", true);
+    xhr.send(null);
     document.cookie = "login= ; expires=Thu, 01 Jan 1970 00:00:01 GMT";
     window.location = window.location.href;
 }
 
 function remplirListes(id){
-    xhr4.onreadystatechange = stateChanged(xhr4, 'datalist');
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = stateChanged(xhr, 'datalist');
     if(id != null) {
         let ingredient = document.getElementById(id.toString()).value;
         if(id === "rechercheContient"){
-            xhr4.open("GET","phpFonctions/remplirListesIngredients.php?inclure="+ingredient+"&exclure=", true);
+            xhr.open("GET","phpFonctions/remplirListesIngredients.php?inclure="+ingredient+"&exclure=", true);
         }
         else if(id === "rechercheNeContientPas"){
-            xhr4.open("GET","phpFonctions/remplirListesIngredients.php?inclure=&exclure="+ingredient, true);
+            xhr.open("GET","phpFonctions/remplirListesIngredients.php?inclure=&exclure="+ingredient, true);
         }
     }
     else {
-        xhr4.open("GET", "phpFonctions/remplirListesIngredients.php?inclure=&exclure=", true);
+        xhr.open("GET", "phpFonctions/remplirListesIngredients.php?inclure=&exclure=", true);
     }
-    xhr4.send(null);
+    xhr.send(null);
     afficherChampsRecherche(id);
 }
 
 function resetListe(id){
-    xhr5.onreadystatechange = stateChanged(xhr5, '');
-    xhr5.open("GET","phpFonctions/reset.php?id="+id, true);
-    xhr5.send(null);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = stateChanged(xhr, '');
+    xhr.open("GET","phpFonctions/reset.php?id="+id, true);
+    xhr.send(null);
 
     remplirListes(id);
 }
 
 function afficherChampsRecherche(id){
-    xhr6.onreadystatechange = stateChanged(xhr6, 'champsRecherche');
-    xhr6.open("GET","phpFonctions/afficherChampsRecherche.php", true);
-    xhr6.send(null);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = stateChanged(xhr, 'champsRecherche');
+    xhr.open("GET","phpFonctions/afficherChampsRecherche.php", true);
+    xhr.send(null);
 
     // Fonctionne alors que la condition devrait être dans l'autre sens
     // ??????????????????????
@@ -69,21 +71,24 @@ function afficherChampsRecherche(id){
 }
 
 function afficherRecettes(){
-    xhr7.onreadystatechange = stateChanged(xhr7, 'recettes');
-    xhr7.open("GET","phpFonctions/afficherRecettesFilAriane.php", true);
-    xhr7.send(null);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = stateChanged(xhr, 'recettes');
+    xhr.open("GET","phpFonctions/afficherRecettesFilAriane.php", true);
+    xhr.send(null);
 }
 
 function ajouterBoissonPanier(login, boisson){
-    xhr8.onreadystatechange = stateChanged(xhr8, '');
-    xhr8.open("GET","phpFonctions/ajouterBoissonPanier.php?login="+login+"&boisson="+boisson, true);
-    xhr8.send(null);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = stateChanged(xhr, '');
+    xhr.open("GET","phpFonctions/ajouterBoissonPanier.php?login="+login+"&boisson="+boisson, true);
+    xhr.send(null);
 }
 
 function rechercher(){
-    xhr9.onreadystatechange = stateChanged(xhr9, 'recettes');
-    xhr9.open("GET","phpFonctions/afficherRecettesRecherche.php", true);
-    xhr9.send(null);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = stateChanged(xhr, 'recettes');
+    xhr.open("GET","phpFonctions/afficherRecettesRecherche.php", true);
+    xhr.send(null);
 }
 
 function stateChanged(xhr, name){
