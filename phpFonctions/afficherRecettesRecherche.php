@@ -5,7 +5,7 @@
     include "afficherRecettes.php";
 
     /**
-     * Renvoie le taux de correspondance entre les ingrédients dans $ingredients et les ingrédients de la boisson
+     * Renvoie le taux d'ingrédients inclus dans $ingrédients par rapport au nombre d'ingrédients de la boisson
      * @param string $titreBoisson La boisson
      * @param string $ingredients La liste des ingrédients
      * @return float Le taux de correspondance (entre 0 et 1)
@@ -126,11 +126,8 @@
                     if (!in_array($element, $aVisiter)) $aVisiter[] = $element;
                 }
             }
-            else{
-                $categoriesInclues[] = $row[1];
-            }
         }
-        array_shift($aVisiter);
+        $categoriesInclues[] = array_shift($aVisiter);
     }
 
     $aVisiter = $_SESSION['exclureIngredients'];
@@ -189,12 +186,13 @@
         usort($correspondanceRecette, "cmp");
     }
 
-
-
-
     // Affichage des boissons
     $listeBoissons = array();
-    foreach ($correspondanceRecette as $boisson) $listeBoissons[] = $boisson[0];
+    $listePrct = array();
+    foreach ($correspondanceRecette as $boisson) {
+        $listeBoissons[] = $boisson[0];
+        $listePrct[] = $boisson[1];
+    }
 
-    afficherRecettes($listeBoissons, $login);
+    afficherRecettes($listeBoissons, $login, $listePrct);
 ?>

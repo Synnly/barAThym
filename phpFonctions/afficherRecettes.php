@@ -1,12 +1,29 @@
 <?php
-    function afficherRecettes($listeBoissons, $login) {
+    function afficherRecettes($listeBoissons, $login, $listePrct) {
         $boissonsAffichees = array();
-
-        echo "<table id=\"boissons\"><tr>";
         $compteur = 0;
+        $palier = 1;
+        echo "<table id=\"boissons\"><tr>";
 
         foreach ($listeBoissons as $boisson) {
             if (!in_array($boisson['titreBoisson'], $boissonsAffichees)) {
+
+                if(isset($listePrct) && $listePrct[array_search($boisson, $listeBoissons)] <= $palier) {
+                    $compteur = 0;
+                    $prct = $listePrct[array_search($boisson, $listeBoissons)];
+                    echo "</tr><tr>";
+                    echo "<td colspan='3' class='ligne'>
+                            <div class='ligne'>
+                                <div><p>".(int)($palier*100)." %</p></div>
+                                <div class='divLigne'><hr></div>
+                            </div>
+                        </td>";
+                    echo "</tr><tr>";
+                    if($prct < 0.3) $palier = 0.1;
+                    elseif($prct < 0.5) $palier = 0.3;
+                    elseif($prct < 0.8) $palier = 0.5;
+                    elseif($prct <= 1.) $palier = 0.8;
+                }
                 if ($compteur % 3 == 0 && $compteur > 0) echo "</tr><tr>";
                 echo "<td>";
 
@@ -27,7 +44,7 @@
 
                 echo "<div class=\"boissonEnTeteTexte\">
                             <p>" . $boisson['titreBoisson'] . "</p>
-                            <button onClick=\"ajouterBoissonPanier('$login','" . $boisson['titreBoisson'] . "')\">Ajouter Favoris</button>
+                            <button onClick=\"ajouterBoissonPanier('$login','" . $boisson['titreBoisson'] . "')\">Ajouter au panier</button>
                         </div>
                         </div>";
 

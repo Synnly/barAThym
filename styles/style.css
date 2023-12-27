@@ -78,7 +78,7 @@ button {
     margin-left: 10px;
 }
 
-div#nav{
+div#nav, div#recherche{
     border: 3px solid white;
     border-radius: 10px;
 }
@@ -174,16 +174,13 @@ div#inputRechercher{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 20px 0px 20px 0px;
+    margin: 10px 0px 20px 0px;
 }
 
 div#inputRechercher button {
     font-size: x-large;
     padding: 5px;
 }
-
-
-
 
 table#boissons {
     width: 100%;
@@ -223,4 +220,25 @@ div.boissonEnTeteTexte p{
     margin: 0;
     font-size: x-large;
     text-align: right;
+}
+
+div#recherche {
+    padding: 10px;
+}
+
+div.ligne {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+
+div.divLigne{
+    padding-left: 10px;
+    flex: 1;
+}
+
+table#boissons td.ligne{
+    border: none;
+    padding: 0 0 0 10px;
 }
