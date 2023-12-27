@@ -11,18 +11,50 @@
                 if(isset($listePrct) && $listePrct[array_search($boisson, $listeBoissons)] <= $palier) {
                     $compteur = 0;
                     $prct = $listePrct[array_search($boisson, $listeBoissons)];
-                    echo "</tr><tr>";
-                    echo "<td colspan='3' class='ligne'>
+
+                    if($prct == $palier && $palier == 1) {
+                        echo "</tr><tr>";
+                        echo "<td colspan='3' class='ligne'>
                             <div class='ligne'>
-                                <div><p>".(int)($palier*100)." %</p></div>
+                                <div><p>100 %</p></div>
                                 <div class='divLigne'><hr></div>
                             </div>
                         </td>";
-                    echo "</tr><tr>";
-                    if($prct < 0.3) $palier = 0.1;
-                    elseif($prct < 0.5) $palier = 0.3;
-                    elseif($prct < 0.8) $palier = 0.5;
-                    elseif($prct <= 1.) $palier = 0.8;
+                        echo "</tr><tr>";
+
+                        $palier = 0.8;
+                    }
+                    else{
+                        $temp = $palier;
+
+                        if($prct < $palier){
+                            if($prct < 1.) {
+                                $palier = 0.8;
+                                $temp = 1.;
+                            }
+                            if($prct < 0.8) {
+                                $palier = 0.5;
+                                $temp = 0.8;
+                            }
+                            if($prct < 0.5) {
+                                $palier = 0.3;
+                                $temp = 0.5;
+                            }
+                            if($prct < 0.3) {
+                                $palier = 0.1;
+                                $temp = 0.3;
+                            }
+                        }
+                        echo "</tr><tr>";
+                        echo "<td colspan='3' class='ligne'>
+                            <div class='ligne'>
+                                <div><p>".(int)($temp*100)." %</p></div>
+                                <div class='divLigne'><hr></div>
+                            </div>
+                        </td>";
+                        echo "</tr><tr>";
+                    }
+
                 }
                 if ($compteur % 3 == 0 && $compteur > 0) echo "</tr><tr>";
                 echo "<td>";
