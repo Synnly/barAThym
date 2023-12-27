@@ -12,7 +12,7 @@
     function getPrctCorrespondance($titreBoisson, $ingredients){
         include "../configBD.php";
         $mysqli = mysqli_connect($_IPBD,$_USERNAME,$_PASSWORD,$_NAMEBD);
-        $query = "SELECT titreAliment FROM Contient WHERE titreBoisson ='$titreBoisson'";
+        $query = "SELECT titreAliment FROM Contient WHERE titreBoisson ='".$mysqli->escape_string($titreBoisson)."'";
         $resultat = $mysqli->query($query);
 
         $nbIngredients = 0;
@@ -22,6 +22,11 @@
         }
         mysqli_close($mysqli);
         return fdiv($nbIngredients, $totalIngredients);
+    }
+
+    function cmp($arg1, $arg2){
+        if($arg1[1] == $arg2[1]) return 0;
+        return ($arg1[1] > $arg2[1] ? -1 : 1);
     }
 
     // Initialisations
@@ -99,7 +104,7 @@
     $sql = "SELECT sousCategorie, titreAliment FROM Aliments WHERE titreAliment = ?";
     $resultat = $pdo->prepare($sql);
 
-    $aVisiter = $_SESSION['inclureIngredients'];
+    $aVisiter = count($_SESSION['inclureIngredients']) > 0 ? $_SESSION['inclureIngredients'] : ['Aliment'];
     $categoriesInclues = array();
 
     // Ingredients à inclure
@@ -125,15 +130,16 @@
     }
 
     $aVisiter = $_SESSION['exclureIngredients'];
+    $categoriesExclues = array();
 
     // Ingrédients à exclure. Executé après les ingrédients à inclure pour que l'exclusion ait la priorité
     while(count($aVisiter) > 0) {
-        echo $aVisiter[0]."<br>";
         $resultat->execute([$aVisiter[0]]);
 
         foreach($resultat as $row){
             $categories = explode(',', $row[0]);
 
+            // Ajout des sous categories à la liste de visite
             foreach ($categories as $element) {
                 if (!in_array($element, $aVisiter)) $aVisiter[] = $element;
             }
@@ -143,11 +149,12 @@
                 $index = array_search($aVisiter[0], $categoriesInclues);
                 array_splice($categoriesInclues, $index, 1);
             }
+
         }
-        array_shift($aVisiter);
+        $categoriesExclues[] = array_shift($aVisiter);
     }
 
-    //
+    // On recupere les recettes uniquement si il y a des ingrédients inclus
     if(count($categoriesInclues) > 0) {
         $correspondanceRecette = array();
 
@@ -155,41 +162,38 @@
         $mysqli = mysqli_connect($_IPBD, $_USERNAME, $_PASSWORD, $_NAMEBD);
         $sql = "SELECT DISTINCT B.* FROM Boisson B, Contient C WHERE C.titreBoisson = B.titreBoisson AND (";
 
+        // Inclusion des ingredients
         foreach ($categoriesInclues as $categorie) {
             $sql .= "titreAliment = '". mysqli_escape_string($mysqli, $categorie)."' OR ";
         }
         $sql = substr($sql, 0, -4).")";
 
+        // Exclusion des ingredients
+        if(count($categoriesExclues) > 0){
+            $sql .= " AND B.titreBoisson NOT IN (SELECT titreBoisson FROM Contient WHERE (";
+            foreach ($categoriesExclues as $categorie) {
+                if($categorie != '') $sql .= "titreAliment = '".mysqli_escape_string($mysqli, $categorie)."' OR ";
+            }
+            $sql = substr($sql, 0, -4)."))";
+        }
         $resultat = $mysqli->query($sql);
 
-        while($row = $resultat->fetch_row()){
-            $correspondanceRecette[] = array(0 => $row, 1 => getPrctCorrespondance($row[0], $categoriesInclues));
+        // Creation de la table
+        while($row = $resultat->fetch_assoc()){
+            $correspondanceRecette[] = array(0 => $row, 1 => getPrctCorrespondance($row['titreBoisson'], $categoriesInclues));
         }
+        usort($correspondanceRecette, "cmp");
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     echo '<table>';
     echo '<tr>';
     $compteur = 0;
 
     //Affichage des recettes
-    foreach($recettes as $boisson){
+    foreach($correspondanceRecette as $boisson){
         if($compteur % 3 == 0 && $compteur != 0) echo '</tr><tr>';
         echo '<td><div class = "boisson">';
-        $titrePhoto = $boisson['titreBoisson'];
+        $titrePhoto = $boisson[0]['titreBoisson'];
         //ON RETIRE LES ACCENTS ET LES ESPACES PARCE QUE SINON CA MARCHE PAS + ON AJOUTE .JPG
         $titrePhoto = iconv('UTF-8', 'ASCII//TRANSLIT', $titrePhoto);
         $titrePhoto = preg_replace('/\s/', '_', $titrePhoto);
@@ -200,22 +204,22 @@
         }
         //Affichage de l'image
         echo '<img src="Photos/'.$titrePhoto.'"/>
-            <button onClick="ajouterBoissonPanier(\''.$login.'\',\''.$boisson['titreBoisson'].'\')">Ajouter Favoris</button>';
+            <button onClick="ajouterBoissonPanier(\''.$login.'\',\''.$boisson[0]['titreBoisson'].'\')">Ajouter Favoris</button>';
         echo '<br>';
 
         //Affichage du titre de la boisson
-        echo $boisson['titreBoisson'];
+        echo $boisson[0]['titreBoisson'];
         echo '<br><br>';
 
         //Affichage des ingredients
         echo 'Ingrédients :<ul>';
-        foreach(explode('|',$boisson['ingredients']) as $ingredient){
+        foreach(explode('|',$boisson[0]['ingredients']) as $ingredient){
             echo '<li>'.$ingredient.'</li>';
         }
         echo '</ul><br>';
 
         //Affichage de la préparation
-        echo $boisson['preparation'];
+        echo $boisson[0]['preparation'];
         echo '<br>';
 
         $compteur++;
