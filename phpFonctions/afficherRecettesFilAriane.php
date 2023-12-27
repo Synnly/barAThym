@@ -16,6 +16,9 @@
     elseif(isset($_POST['login'])){
         $login = $_POST['login'];
     }
+    else{
+        $login = '';
+    }
 
     $mysqli = mysqli_connect($_IPBD,$_USERNAME,$_PASSWORD,$_NAMEBD);
 
@@ -78,7 +81,7 @@
         $titrePhoto = preg_replace('/\s/', '_', $titrePhoto);
         $titrePhoto = $titrePhoto.'.jpg';
 
-        if(!($photo = fopen("Photos/".$titrePhoto,"r"))){
+        if(!($photo = fopen("../Photos/".$titrePhoto,"r"))){
             $titrePhoto = "glass.png";
         }
         //Affichage de l'image
