@@ -22,7 +22,7 @@
     //Remplissage du tableau des recettes à afficher
     while( ($alimentActuel = array_pop($Avisiter))){
         //Echappement des guillemets
-        $titreAliment = addslashes($alimentActuel);
+        $titreAliment = mysqli_escape_string($mysqli,$alimentActuel);
         $temp=[];
 
         //Requete

@@ -10,5 +10,4 @@
     elseif($_GET['id'] == "rechercheNeContientPas"){
         unset($_SESSION['exclureIngredients']);
     }
-
 ?>

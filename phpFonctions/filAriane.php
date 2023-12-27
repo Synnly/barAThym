@@ -27,7 +27,7 @@
     foreach($_SESSION['filAriane'] as $noeud){    // Parcours du fil d'arianne
 
         foreach(explode(",", $noeud) as $categorie){   // Parcours des categories
-            if($categorie != "") $html .= "<a onClick=\"refreshHierarchie('".addslashes($categorie)."')\">".$categorie."</a>, ";
+            if($categorie != "") $html .= "<a onClick=\"refreshHierarchie('".mysqli_escape_string($mysqli,$categorie)."')\">".$categorie."</a>, ";
         }
         $html = substr($html, 0, -2); // Suppression de la derniere virgule
         $html .= " > ";

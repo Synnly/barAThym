@@ -18,12 +18,12 @@
         foreach($categories as $categorie){     // Parcours des sous categories
 
             // Requete pour savoir si la sous categorie a une sous categorie 
-            $sql2 = "SELECT sousCategorie FROM Aliments WHERE titreAliment='".addslashes($categorie)."';";
+            $sql2 = "SELECT sousCategorie FROM Aliments WHERE titreAliment='".mysqli_escape_string($mysqli,$categorie)."';";
             $resultat2=mysqli_query($mysqli,$sql2) or die("$sql2 : ".mysqli_error($mysqli));
             $html .= "<p";
 
             if(($resultat2->fetch_row())[0] != ""){     // L'ingrédient a une/plusieurs sous catégorie(s) donc on pourra continuer à descendre dans l'arbre
-                $html .= " onclick=\"refreshHierarchie('".addslashes($categorie)."')\"";
+                $html .= " onclick=\"refreshHierarchie('".mysqli_escape_string($mysqli,$categorie)."')\"";
             }
 
             $html .= ">".$categorie."</p>";
