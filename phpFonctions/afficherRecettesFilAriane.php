@@ -2,6 +2,7 @@
 <?php
     
     include "../configBD.php";
+    include "afficherRecettes.php";
     $dernierAliment = isset($_SESSION['filAriane']) ? end($_SESSION['filAriane']) : 'Aliment';
     if(isset($_SESSION['filAriane'])) reset($_SESSION['filAriane']);
     $Avisiter = [$dernierAliment];
@@ -66,49 +67,7 @@
             }
         }
     }
-
-    echo '<table>';
-    echo '<tr>';
-    $compteur = 0;
-
-    //Affichage des recettes
-    foreach($recettes as $boisson){
-        if($compteur % 3 == 0 && $compteur != 0) echo '</tr><tr>';
-        echo '<td><div class = "boisson">';
-        $titrePhoto = $boisson['titreBoisson'];
-        //ON RETIRE LES ACCENTS ET LES ESPACES PARCE QUE SINON CA MARCHE PAS + ON AJOUTE .JPG
-        $titrePhoto = iconv('UTF-8', 'ASCII//TRANSLIT', $titrePhoto);
-        $titrePhoto = preg_replace('/\s/', '_', $titrePhoto);
-        $titrePhoto = $titrePhoto.'.jpg';
-
-        if(!($photo = fopen("../Photos/".$titrePhoto,"r"))){
-            $titrePhoto = "glass.png";
-        }
-        //Affichage de l'image
-        echo '<img src="Photos/'.$titrePhoto.'"/>
-        <button onClick="ajouterBoissonPanier(\''.$login.'\',\''.$boisson['titreBoisson'].'\')">Ajouter Favoris</button>';
-        echo '<br>';
-
-        //Affichage du titre de la boisson
-        echo $boisson['titreBoisson'];
-        echo '<br><br>';
-
-        //Affichage des ingredients
-        echo 'Ingrédients :<ul>';
-        foreach(explode('|',$boisson['ingredients']) as $ingredient){
-            echo '<li>'.$ingredient.'</li>';
-        }
-        echo '</ul><br>';
-
-        //Affichage de la préparation
-        echo $boisson['preparation'];
-        echo '<br>';
-
-        $compteur++;
-        echo '</div></td>';
-
-    }
-    echo'</tr>';
-    echo '</table>';
     mysqli_close($mysqli);
+
+    afficherRecettes($recettes, $login);
 ?>

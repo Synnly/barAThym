@@ -17,7 +17,7 @@
     }else{ //Sinon on supprime la boisson du tableau de session panier
         foreach($_SESSION['panier'] as $boisson){
             if($boisson['titreBoisson'] == $_GET['boisson']){
-                unset($_SESSION['panier'][array_search($boisson['titreBoisson'], $_SESSION['panier'])]);
+                array_splice($_SESSION['panier'], array_search($boisson['titreBoisson'], $_SESSION['panier']), 1);
             }
         }
     }

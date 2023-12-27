@@ -2,6 +2,7 @@
 <?php
 
     include "../configBD.php";
+    include "afficherRecettes.php";
 
     /**
      * Renvoie le taux de correspondance entre les ingrédients dans $ingredients et les ingrédients de la boisson
@@ -188,48 +189,12 @@
         usort($correspondanceRecette, "cmp");
     }
 
-    echo '<table>';
-    echo '<tr>';
-    $compteur = 0;
 
-    //Affichage des recettes
-    foreach($correspondanceRecette as $boisson){
-        if($compteur % 3 == 0 && $compteur != 0) echo '</tr><tr>';
-        echo '<td><div class = "boisson">';
-        $titrePhoto = $boisson[0]['titreBoisson'];
-        //ON RETIRE LES ACCENTS ET LES ESPACES PARCE QUE SINON CA MARCHE PAS + ON AJOUTE .JPG
-        $titrePhoto = iconv('UTF-8', 'ASCII//TRANSLIT', $titrePhoto);
-        $titrePhoto = preg_replace('/\s/', '_', $titrePhoto);
-        $titrePhoto = $titrePhoto.'.jpg';
 
-        if(!($photo = fopen("../Photos/".$titrePhoto,"r"))){
-            $titrePhoto = "glass.png";
-        }
-        //Affichage de l'image
-        echo '<img src="../Photos/'.$titrePhoto.'"/>
-            <button onClick="ajouterBoissonPanier(\''.$login.'\',\''.$boisson[0]['titreBoisson'].'\')">Ajouter Favoris</button>';
-        echo '<br>';
 
-        //Affichage du titre de la boisson
-        echo $boisson[0]['titreBoisson'];
-        echo '<br><br>';
+    // Affichage des boissons
+    $listeBoissons = array();
+    foreach ($correspondanceRecette as $boisson) $listeBoissons[] = $boisson[0];
 
-        //Affichage des ingredients
-        echo 'Ingrédients :<ul>';
-        foreach(explode('|',$boisson[0]['ingredients']) as $ingredient){
-            echo '<li>'.$ingredient.'</li>';
-        }
-        echo '</ul><br>';
-
-        //Affichage de la préparation
-        echo $boisson[0]['preparation'];
-        echo '<br>';
-
-        $compteur++;
-        echo '</div></td>';
-
-    }
-    echo'</tr>';
-    echo '</table>';
-
+    afficherRecettes($listeBoissons, $login);
 ?>
