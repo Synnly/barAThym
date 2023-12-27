@@ -14,8 +14,8 @@
         $res = $pdo->prepare($sql);
         $res->execute([$_GET['login'], $_GET['boisson']]);
     }else{//Sinon on ajoute la boisson dans le tableau de session panier
-        $titreBoisson = $_GET['boisson'];
         $mysqli = mysqli_connect($_IPBD,$_USERNAME,$_PASSWORD,$_NAMEBD);
+        $titreBoisson = mysqli_escape_string($mysqli,$_GET['boisson']);
         $query = "SELECT * FROM Boisson WHERE titreBoisson = '$titreBoisson'";
         $resultat = $mysqli->query($query);
 
