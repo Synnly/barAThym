@@ -1,7 +1,12 @@
 <?php session_start(); ?>
 <?php
 
-    echo "<div id=\"champsRecherche\"><label for=\"rechercheContient\">Ingrédients à inclure</label>
+    echo "<div id=\"champsRecherche\">
+
+        <div id=\"inputRechercher\">
+            <button onclick=\"rechercher()\">Rechercher</button>
+        </div>
+        <label for=\"rechercheContient\">Ingrédients à inclure</label>
         <div class=\"inputRecherche\">
             <input type=\"text\" list=\"listeContient\" id=\"rechercheContient\">
             <button onclick=\"remplirListes('rechercheContient')\">Inclure</button>

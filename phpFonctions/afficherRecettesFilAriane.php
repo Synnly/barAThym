@@ -17,18 +17,18 @@
         $login = $_POST['login'];
     }
 
+    $mysqli = mysqli_connect($_IPBD,$_USERNAME,$_PASSWORD,$_NAMEBD);
+
     //Remplissage du tableau des recettes à afficher
     while( ($alimentActuel = array_pop($Avisiter))){
         //Echappement des guillemets
         $titreAliment = addslashes($alimentActuel);
         $temp=[];
-        $mysqli = mysqli_connect($_IPBD,$_USERNAME,$_PASSWORD,$_NAMEBD);
 
-        
         //Requete
         $query = "SELECT sousCategorie FROM Aliments WHERE titreAliment = '$titreAliment'";
         $resultat = $mysqli->query($query);
-        
+
         $nuplet = $resultat->fetch_row();
         //Si sous possède des sous catégories
         if($nuplet[0] != null){
@@ -43,14 +43,14 @@
         }else{
             $recettesTemp=[];
             //Requete
-    
             $query = "SELECT B.* FROM Boisson B,Contient C WHERE titreAliment = '$titreAliment' AND C.titreBoisson = B.titreBoisson";
             $resultat = $mysqli->query($query);
+
             //Parcours du resultat
             while($nuplet = $resultat->fetch_assoc()){
                 $recettesTemp[] = $nuplet;
-            
             }
+
             //On vérifie si les recettes ajoutées sont dejà dans les recettes affichées
             foreach($recettesTemp as $recette){
                 $dejaPresent = false;
@@ -63,7 +63,7 @@
             }
         }
     }
-    $coupable;
+
     echo '<table>';
     echo '<tr>';
     $compteur = 0;

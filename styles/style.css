@@ -168,3 +168,15 @@ div.inputRecherche{
 div.inputRecherche input {
     margin-bottom: 0px;
 }
+
+div#inputRechercher{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px 0px 20px 0px;
+}
+
+div#inputRechercher button {
+    font-size: x-large;
+    padding: 5px;
+}

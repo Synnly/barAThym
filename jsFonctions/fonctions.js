@@ -2,6 +2,7 @@ var xhr1 = new XMLHttpRequest(); var xhr2 = new XMLHttpRequest();
 var xhr3 = new XMLHttpRequest(); var xhr4 = new XMLHttpRequest();
 var xhr5 = new XMLHttpRequest(); var xhr6 = new XMLHttpRequest();
 var xhr7 = new XMLHttpRequest(); var xhr8 = new XMLHttpRequest();
+var xhr9 = new XMLHttpRequest(); var xhr10 = new XMLHttpRequest();
 
 function afficherSousCategorie(ingredient){
     xhr1.onreadystatechange = stateChanged(xhr1, 'hierarchie');
@@ -69,16 +70,20 @@ function afficherChampsRecherche(id){
 
 function afficherRecettes(){
     xhr7.onreadystatechange = stateChanged(xhr7, 'recettes');
-    xhr7.open("GET","phpFonctions/afficherRecettes.php", true);
+    xhr7.open("GET","phpFonctions/afficherRecettesFilAriane.php", true);
     xhr7.send(null);
 }
 
 function ajouterBoissonPanier(login, boisson){
     xhr8.onreadystatechange = stateChanged(xhr8, '');
-    //console.log(login);
-    //console.log(boisson);
     xhr8.open("GET","phpFonctions/ajouterBoissonPanier.php?login="+login+"&boisson="+boisson, true);
     xhr8.send(null);
+}
+
+function rechercher(){
+    xhr9.onreadystatechange = stateChanged(xhr9, 'recettes');
+    xhr9.open("GET","phpFonctions/afficherRecettesRecherche.php", true);
+    xhr9.send(null);
 }
 
 function stateChanged(xhr, name){
