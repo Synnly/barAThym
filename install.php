@@ -84,8 +84,8 @@
     // Creation et remplissage de la table Contient
     $sql="DROP TABLE IF EXISTS Contient;
         CREATE TABLE Contient (
-            titreBoisson VARCHAR(150) REFERENCES Boisson(titreBoisson),
-            titreAliment VARCHAR(150) REFERENCES Aliments(titreAliment),
+            titreBoisson VARCHAR(150) REFERENCES Boisson(titreBoisson) ON DELETE CASCADE,
+            titreAliment VARCHAR(150) REFERENCES Aliments(titreAliment) ON DELETE CASCADE,
             PRIMARY KEY (titreBoisson, titreAliment)
     );";
 
@@ -125,8 +125,8 @@
     //Create de la table Panier
     $sql="DROP TABLE IF EXISTS Panier;
         CREATE TABLE Panier (
-            login VARCHAR(50) REFERENCES Utilisateurs(login),
-            titreBoisson VARCHAR(150) REFERENCES Boisson(titreBoisson),
+            login VARCHAR(50) REFERENCES Utilisateurs(login) ON DELETE CASCADE,
+            titreBoisson VARCHAR(150) REFERENCES Boisson(titreBoisson) ON DELETE CASCADE,
             PRIMARY KEY (login, titreBoisson)
         );";
 

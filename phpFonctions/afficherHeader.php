@@ -1,14 +1,19 @@
 <?php
 
+    /**
+     * Affiche le header de la page d'accueil
+     * @param $login string Le login de l'utilisateur
+     * @param $connecte boolean True si l'utilisateur s'est connecté, false sinon
+     * @return void
+     */
     function afficherHeader($login, $connecte){
         echo "<table id=\"header\"><tr>
                     <td><div id=\"headerGauche\">";
 
         if($connecte){  // Si connecté, affichage du login
             echo "<p>Bienvenue <b>$login</b></p>";
-                
         }
-        else{   // Sinon, affichage du formulaire de connection
+        else{           // Sinon, affichage du formulaire de connection
             echo "<form method=\"post\" id=\"loginForm\">
                     <legend>Login</legend>
                     <input type=\"text\" name=\"login\">
@@ -32,6 +37,12 @@
             </tr></table>";
     }
 
+    /**
+     * Affiche le header de la page du panier
+     * @param $login string Le login de l'utilisateur
+     * @param $connecte boolean True si l'utilisateur s'est connecté, false sinon
+     * @return void
+     */
     function afficherHeaderPanier($login, $connecte){
         echo "<table id=\"header\"><tr>
                     <td><div id=\"headerGauche\">";
@@ -39,7 +50,7 @@
         if($connecte){  // Si connecté, affichage du login
             echo "<p>Bienvenue <b>$login</b></p>";
         }
-        else{   // Sinon, affichage du formulaire de connection
+        else{           // Sinon, affichage du formulaire de connection
             echo "<form method=\"post\" id=\"loginForm\">
                     <legend>Login</legend>
                     <input type=\"text\" name=\"login\">

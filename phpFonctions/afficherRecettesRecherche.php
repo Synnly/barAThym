@@ -33,7 +33,6 @@
     // Initialisations
     $dernierAliment = isset($_SESSION['filAriane']) ? end($_SESSION['filAriane']) : 'Aliment';
     if(isset($_SESSION['filAriane'])) reset($_SESSION['filAriane']);
-
     $Avisiter = [$dernierAliment];
     $recettes=[];
     $sousCatAct=[];
@@ -155,7 +154,7 @@
         $categoriesExclues[] = array_shift($aVisiter);
     }
 
-    // On recupere les recettes uniquement si il y a des ingrédients inclus
+    // On recupere les recettes uniquement s'il y a des ingrédients inclus
     if(count($categoriesInclues) > 0) {
         $correspondanceRecette = array();
 

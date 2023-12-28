@@ -22,22 +22,23 @@
             else{
                 if($_POST['submitConnect'] == "Connexion"){  // Demande de connexion envoyée
 
+                    // Requete du mot de passe
                     try{
                         $pdo = new PDO('mysql:host='.$_IPBD.';dbname='.$_NAMEBD, $_USERNAME, $_PASSWORD);
                     }
                     catch(Exception $e){
                         exit($e->getMessage());
                     }
-                   
-                    // Requete du mot de passe
+
                     $sql="SELECT password FROM Utilisateurs WHERE login = ? ;";
                     $resultat = $pdo->prepare($sql);
                     $resultat->execute([$_POST['login']]);
                     foreach ($resultat as $row){
                         $pswd = $row[0];
-                    } 
+                    }
 
-                    if (password_verify($_POST['password'], $pswd)){   // Le mot de passe correspond
+                    // Verification du mot de passe
+                    if (password_verify($_POST['password'], $pswd)){
                         afficherHeaderPanier($_POST['login'], true);
                         setcookie("login", $_POST['login'], time()+3600);
                     }
@@ -54,16 +55,8 @@
     </header>
     <main>
         <?php
-
-            if(isset($_COOKIE['login'])){
-                $login = $_COOKIE['login'];
-            }
-            elseif(isset($_POST['login'])){
-                $login = $_POST['login'];
-            }
-
             echo "<div id=\"panier\"></div>";
-            echo "<script>afficherPanier('$login');</script>"
+            echo "<script>afficherPanier();</script>"
         ?>
     </main>
 </body>

@@ -74,15 +74,15 @@
                 }
 
                 else{   // Login et mot de passe valides
-                    
+
+                    // Requete du mot de passe
                     try{
                         $pdo = new PDO('mysql:host='.$_IPBD.';dbname='.$_NAMEBD, $_USERNAME, $_PASSWORD);
                     }
                     catch(Exception $e){
                         exit($e->getMessage());
                     }
-                   
-                    // Requete du mot de passe
+
                     $sql="SELECT * FROM Utilisateurs WHERE login = ? ;";
                     $res = $pdo->prepare($sql);
                     $res->execute([$_POST['login']]);

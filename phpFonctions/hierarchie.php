@@ -1,4 +1,3 @@
-
 <?php session_start(); ?>
 <?php 
     include "../configBD.php"; 
@@ -7,13 +6,13 @@
     $mysqli=mysqli_connect($_IPBD, $_USERNAME, $_PASSWORD, $_NAMEBD);
 
     // Requete pour afficher les sous categories de l'ingredient
-    $sql1="SELECT sousCategorie FROM Aliments WHERE titreAliment='".mysqli_escape_string($mysqli,$_GET['ingredient'])."';";
-    $resultat1=mysqli_query($mysqli,$sql1) or die("$sql1 : ".mysqli_error($mysqli));
-    
+    $sql="SELECT sousCategorie FROM Aliments WHERE titreAliment='".mysqli_escape_string($mysqli,$_GET['ingredient'])."';";
+    $resultat1=mysqli_query($mysqli,$sql) or die("$sql : ".mysqli_error($mysqli));
+
+    $html = "";
+
     while($row1 = $resultat1->fetch_row()){     // Parcours des resultats de la requete
-        
         $categories = explode(",", $row1[0]);
-        $html = "";
 
         foreach($categories as $categorie){     // Parcours des sous categories
 

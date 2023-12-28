@@ -3,11 +3,12 @@
     
     include "../configBD.php";
     include "afficherRecettes.php";
+
+    // Initialisations
     $dernierAliment = isset($_SESSION['filAriane']) ? end($_SESSION['filAriane']) : 'Aliment';
     if(isset($_SESSION['filAriane'])) reset($_SESSION['filAriane']);
     $Avisiter = [$dernierAliment];
     $recettes=[];
-    $alimentActuel;
     $sousCatAct=[];
 
     // Recuperation du login
@@ -32,18 +33,16 @@
         //Requete
         $query = "SELECT sousCategorie FROM Aliments WHERE titreAliment = '$titreAliment'";
         $resultat = $mysqli->query($query);
-
         $nuplet = $resultat->fetch_row();
-        //Si sous possède des sous catégories
+
+        //Si la sous catégorie possède des sous catégories
         if($nuplet[0] != null){
             //Séparation des sous catégories
             $sousCatAct = explode(",",$nuplet[0]);
 
             //Ajout dans la liste des aliments à visiter
-            foreach($sousCatAct as $sousCat){
-                $Avisiter[] = $sousCat;
-            } 
-            
+            foreach($sousCatAct as $sousCat) $Avisiter[] = $sousCat;
+
         }else{
             $recettesTemp=[];
             //Requete

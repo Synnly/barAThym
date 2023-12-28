@@ -1,10 +1,18 @@
-function afficherPanier(login){
+/**
+ * Fonction AJAX pour affiche les recettes dans le panier
+ */
+function afficherPanier(){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = stateChanged(xhr, 'panier');
-    xhr.open("GET","phpFonctions/afficherPanier.php?login="+login, true);
+    xhr.open("GET","phpFonctions/afficherPanier.php", true);
     xhr.send(null);
 }
 
+/**
+ * Fonction AJAX pour retirer la boisson du panier de l'utilisateur
+ * @param login Le login de l'utilisateur
+ * @param boisson La boisson à retirer
+ */
 function retirerBoissonPanier(login, boisson){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = stateChanged(xhr, '');
@@ -13,6 +21,10 @@ function retirerBoissonPanier(login, boisson){
     afficherPanier('login');
 }
 
+/**
+ * Fonction AJAX pour retirer la boisson du panier du visiteur
+ * @param boisson La boisson à retirer
+ */
 function retirerBoissonPanierVisiteur(boisson){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = stateChanged(xhr, '');

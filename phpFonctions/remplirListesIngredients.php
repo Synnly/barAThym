@@ -18,6 +18,7 @@
     $listeCategoriesExclues = $_SESSION['exclureIngredients'];
     $aVisiter = [$categorie];
 
+    // Requete
     try{
         $pdo = new PDO('mysql:host='.$_IPBD.';dbname='.$_NAMEBD, $_USERNAME, $_PASSWORD);
     }

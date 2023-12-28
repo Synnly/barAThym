@@ -2,7 +2,6 @@
 <?php
 
     echo "<div id=\"champsRecherche\">
-
         <div id=\"inputRechercher\">
             <button onclick=\"rechercher()\">Rechercher</button>
         </div>
@@ -11,7 +10,7 @@
             <input type=\"text\" list=\"listeContient\" id=\"rechercheContient\">
             <button onclick=\"remplirListes('rechercheContient')\">Inclure</button>
             <button onclick=\"resetListe('rechercheContient')\">Reset</button>
-            </div><ul>";
+        </div><ul>";
 
     foreach ($_SESSION['inclureIngredients'] as $categorie){
         echo "<li>$categorie</li>";
