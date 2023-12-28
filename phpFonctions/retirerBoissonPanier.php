@@ -16,13 +16,13 @@
         $res = $pdo->prepare($sql);
         $res->execute([$_GET['login'], $_GET['boisson']]);
     }
-    else{  //Sinon on supprime la boisson du tableau de session panier
-        foreach($_SESSION['panier'] as $boisson){
-            if($boisson['titreBoisson'] == $_GET['boisson']){
-                array_splice($_SESSION['panier'], array_search($boisson['titreBoisson'], $_SESSION['panier']), 1);
-            }
+    //On supprime la boisson du tableau de session panier
+    foreach($_SESSION['panier'] as $boisson){
+        if($boisson['titreBoisson'] == $_GET['boisson']){
+            array_splice($_SESSION['panier'], array_search($boisson['titreBoisson'], $_SESSION['panier']), 1);
         }
     }
+    
     
 
 ?>
