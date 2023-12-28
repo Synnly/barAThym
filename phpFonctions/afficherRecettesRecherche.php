@@ -7,7 +7,7 @@
     /**
      * Renvoie le taux d'ingrédients inclus dans $ingrédients par rapport au nombre d'ingrédients de la boisson
      * @param string $titreBoisson La boisson
-     * @param string $ingredients La liste des ingrédients
+     * @param array $ingredients La liste des ingrédients
      * @return float Le taux de correspondance (entre 0 et 1)
      */
     function getPrctCorrespondance($titreBoisson, $ingredients){
