@@ -71,6 +71,7 @@
                 <legend>Téléphone</legend>
                 <input type=\"number\" name=\"telephone\" maxlengh=\"10\"value=\"".$nuplet['telephone']."\">
                 <br>
+                <a href=\"index.php\">Accueil</a><br>
                 <input type=\"submit\" value=\"Modifier\" name=\"submitModif\">
             </form></div></div>
             ";
