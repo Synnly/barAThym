@@ -27,7 +27,7 @@
         }
         echo "</div></td>
                 <td><div id=\"headerDroite\">";
-
+        if($connecte) echo "<form action=\"compte.php\"> <button type=\"submit\">Modifier Compte</button> </form>";   
         if($connecte) echo "<button onClick=\"deconnecter()\">Deconnection</button>";
 
         echo "<form action=\"panier.php\">
@@ -64,7 +64,7 @@
         }
         echo "</div></td>
                 <td><div id=\"headerDroite\">";
-                
+        if($connecte) echo "<form action=\"compte.php\"> <button type=\"submit\">Modifier Compte</button> </form>";        
         if($connecte) echo "<button onClick=\"deconnecter()\">Deconnection</button>";
 
         echo "<form action=\"index.php\">
